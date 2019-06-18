@@ -16,7 +16,7 @@ cd WiringOP-Zero
 sudo make install
 
 Now for pypilot:
-git clone https://github.com/pypilot/pypilot
+git clone https://github.com/hooijschuur/pypilot
 cd pypilot
 sudo python setup.py install
 
