@@ -188,16 +188,16 @@ class Autopilot(object):
 
     self.runtime = self.Register(TimeValue, 'runtime') #, persistent=True)
 
-    device = '/dev/watchdog0'
-    self.watchdog_device = False
-    try:
-        self.watchdog_device = open(device, 'w')
-    except:
-        print 'warning: failed to open special file', device, 'for writing'
-        print '         cannot stroke the watchdog'
-
-    if os.system('sudo chrt -pf 1 %d 2>&1 > /dev/null' % os.getpid()):
-      print 'warning, failed to make autopilot process realtime'
+ #   device = '/dev/watchdog0'
+ #   self.watchdog_device = False
+ #   try:
+ #       self.watchdog_device = open(device, 'w')
+ #   except:
+ #       print 'warning: failed to open special file', device, 'for writing'
+ #       print '         cannot stroke the watchdog'
+#
+#   if os.system('sudo chrt -pf 1 %d 2>&1 > /dev/null' % os.getpid()):
+#      print 'warning, failed to make autopilot process realtime'
 
     self.starttime = time.time()
     self.times = 4*[0]
@@ -219,10 +219,10 @@ class Autopilot(object):
       print 'closing autopilot'
       self.server.__del__()
 
-      if self.watchdog_device:
-          print 'close watchdog'
-          self.watchdog_device.write('V')
-          self.watchdog_device.close()
+ #     if self.watchdog_device:
+ #         print 'close watchdog'
+ #         self.watchdog_device.write('V')
+ #         self.watchdog_device.close()
 
   def Register(self, _type, name, *args, **kwargs):
     return self.server.Register(_type(*(['ap.' + name] + list(args)), **kwargs))
@@ -406,8 +406,8 @@ class Autopilot(object):
       #self.times = map(lambda x, y : .975*x + .025*y, self.times, times)
       #print 'times', map(lambda t : '%.2f' % (t*1000), self.times)
       
-      if self.watchdog_device:
-          self.watchdog_device.write('c')
+     # if self.watchdog_device:
+     #     self.watchdog_device.write('c')
 
       while True:
           dt = self.boatimu.period - (time.time() - t00)
