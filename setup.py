@@ -26,12 +26,12 @@ arduino_servo_module = Extension('_arduino_servo',
 
 
 
-ugfx_defs = ['-DWIRINGPI']
-try:
-    import RPi.GPIO
-    ugfx_libraries=['wiringPi']
-except:
-    try:
+#ugfx_defs = ['-DWIRINGPI']
+#try:
+#    import RPi.GPIO
+#    ugfx_libraries=['wiringPi']
+#except:
+#    try:
         import OPi.GPIO
         ugfx_libraries=['wiringPi']
     except:
