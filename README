@@ -1,4 +1,4 @@
-Installing:
+Installing on Atomic pi:
 
 The dependencies can be installed with "apt install" or sometimes 'pip install"
 
