@@ -32,29 +32,29 @@ arduino_servo_module = Extension('_arduino_servo',
 #    ugfx_libraries=['wiringPi']
 #except:
 #    try:
-        import OPi.GPIO
-        ugfx_libraries=['wiringPi']
-    except:
-        print('no wiring library for ugfx')
-        ugfx_libraries=[]
-        ugfx_defs = []
+#        import OPi.GPIO
+#        ugfx_libraries=['wiringPi']
+#    except:
+#        print('no wiring library for ugfx')
+#        ugfx_libraries=[]
+#        ugfx_defs = []
+#
+#ugfx_module = Extension('_ugfx',
+#                        sources=['lcd/ugfx/ugfx.cpp',
+#                                 'lcd/ugfx/ugfx.i'],
+#                        extra_compile_args=['-Wno-unused-result'] + ugfx_defs,
+#                        libraries=ugfx_libraries,
+#                        swig_opts=['-c++'] + ugfx_defs
+#)
 
-ugfx_module = Extension('_ugfx',
-                        sources=['lcd/ugfx/ugfx.cpp',
-                                 'lcd/ugfx/ugfx.i'],
-                        extra_compile_args=['-Wno-unused-result'] + ugfx_defs,
-                        libraries=ugfx_libraries,
-                        swig_opts=['-c++'] + ugfx_defs
-)
-
-import os, os.path
-locale_files = []
-for walk in os.walk('lcd/locale'):
-    path, dirs, files = walk
-    path = path[len('lcd/'):]
-    for file in files:
-        if file[len(file)-3:] == '.mo':
-            locale_files.append(os.path.join(path, file))
+#import os, os.path
+#locale_files = []
+#for walk in os.walk('lcd/locale'):
+#    path, dirs, files = walk
+#    path = path[len('lcd/'):]
+#    for file in files:
+#        if file[len(file)-3:] == '.mo':
+#            locale_files.append(os.path.join(path, file))
 
 
             
@@ -64,12 +64,16 @@ setup (name = 'pypilot',
        license = 'GPLv3',
        author="Sean D'Epagnier",
        url='http://pypilot.org/',
-       packages=['pypilot', 'pypilot/pilots', 'pypilot/arduino_servo', 'ui', 'lcd', 'webapp', 'signalk', 'signalk/linebuffer', 'lcd/ugfx'],
-       ext_modules = [arduino_servo_module, linebuffer_module, ugfx_module],
+#       packages=['pypilot', 'pypilot/pilots', 'pypilot/arduino_servo', 'ui', 'lcd', 'webapp', 'signalk', 'signalk/linebuffer', 'lcd/ugfx'],
+#       ext_modules = [arduino_servo_module, linebuffer_module, ugfx_module],
+       packages=['pypilot', 'pypilot/pilots', 'pypilot/arduino_servo', 'ui', 'webapp', 'signalk', 'signalk/linebuffer'],
+       ext_modules = [arduino_servo_module, linebuffer_module],
 #       py_modules = ['pypilot/arduino_servo', 'signalk/linebuffer/linebuffer'],
-       package_data={'lcd': ['font.ttf'] + locale_files,
-                     'ui': ['*.png', '*.mtl', '*.obj'],
-                     'webapp': ['static/*', 'templates/*']},
+#       package_data={'lcd': ['font.ttf'] + locale_files,
+#                     'ui': ['*.png', '*.mtl', '*.obj'],
+#                     'webapp': ['static/*', 'templates/*']},
+       package_data={'ui': ['*.png', '*.mtl', '*.obj'],
+                     'webapp': ['static/*', 'templates/*']},       
 #       requires=['flask', 'gevent'], # webapp
        #       dependency_links	= ['https://github.com/adafruit/Adafruit_Nokia_LCD/tarball/master#egg=Adafruit-Nokia-LCD-0.1.0'],
 #       install_requires	= ['Adafruit-Nokia-LCD>=0.1.0'],
@@ -79,7 +83,7 @@ setup (name = 'pypilot',
                'pypilot_boatimu=pypilot.boatimu:main',
                'pypilot_servo=pypilot.servo:main',
                'pypilot_webapp=webapp.webapp:main',
-               'pypilot_lcd=lcd.lcd:main',
+#               'pypilot_lcd=lcd.lcd:main',
                'pypilot_control=ui.autopilot_control:main',
                'pypilot_calibration=ui.autopilot_calibration:main',
                'signalk_client=signalk.client:main',
