@@ -28,7 +28,7 @@ msgstr "lcd en afstandsbediening instellen"
 
 #: templates/index.html:17
 msgid "clear"
-msgstr "duidelijk"
+msgstr "licht"
 
 #: templates/index.html:17
 msgid "default"
